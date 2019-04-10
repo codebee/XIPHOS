@@ -4,10 +4,12 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import Header from "../components/common/header";
 import Loader from "../components/common/loader";
-
+import LoginPopup from "../components/common/loginPopup";
 
 import RantListPage from "./rantListPage";
 import RantDetailsPage from "./rantDetailsPage";
+
+
 
 export default class App extends React.Component{
 	constructor(){
@@ -48,6 +50,7 @@ export default class App extends React.Component{
 				            	<Route exact path="/rant/:rant_id" render={(props) => <RantDetailsPage {...props} isLoading={this.state.isLoading}/>} />
 
 
+				            	<LoginPopup/>
 				            	
 				            </div>
 				        </section>
