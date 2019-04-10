@@ -12,7 +12,15 @@ export default class App extends React.Component{
 		this.state={
 			user:"Gayan",
 			view: "Post",
+			isLoading: true
 		}
+	}
+
+	componentDidMount(){
+		const that = this;
+		setTimeout(function(){
+			{that.setState({isLoading:false})}
+		},1000);
 	}
 
 	render(){
@@ -21,14 +29,23 @@ export default class App extends React.Component{
 
 				<Header user={this.state.user}/>
 			    
-			    {this.state.view == "Post" &&
+			    
 					<section class="main layout--center">
 			            <div class="main__content layout--wrapped">
-			            	<Loader/>
-			            	<PostList/>
+
+
+			            	{this.state.isLoading && 
+			            		<Loader/>
+			            	}
+
+			            	{this.state.view == "Post" && !this.state.isLoading &&
+			            		<PostList/>
+			            	}
+
+
 			            </div>
 			        </section>
-			    }
+			    
 	       </React.Fragment>	        	    	
 		)
 	}
