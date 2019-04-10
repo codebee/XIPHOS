@@ -19,15 +19,23 @@ export default class App extends React.Component{
 			user:"Gayan",
 			view: "Post",
 			isLoading: true,
-			isOpen:true
+			isOpen:false,
+
 		}
+
+		this.showLoginPopup = this.showLoginPopup.bind(this);
 	}
 
 	componentDidMount(){
 		const that = this;
 		setTimeout(function(){
-			{that.setState({isLoading:false, isOpen:false})}
+			{that.setState({isLoading:false})}
 		},1000);
+	}
+
+	showLoginPopup(e){   
+	    console.log("click 123");
+	    this.setState({isOpen:true});
 	}
 
 	render(){
@@ -37,7 +45,7 @@ export default class App extends React.Component{
 			
 				<Router>
 					<React.Fragment>
-						<Header user={this.state.user}/>
+						<Header user={this.state.user} dispatch={this.showLoginPopup}/>
 				    					    
 						<section className="main layout--center">
 				            <div className="main__content layout--wrapped">

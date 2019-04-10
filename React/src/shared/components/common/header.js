@@ -10,8 +10,10 @@ export default class Header extends React.Component{
 			showJoinButton:true
 		}
 
-		console.log(this.props);
+		
+		this.showLoginPopup = this.props.dispatch;		
 	}
+	
 
 	render(){
 		return(
@@ -35,7 +37,7 @@ export default class Header extends React.Component{
 
 		                <div className="join">
 		                	{this.state.showJoinButton &&
-		                		<span>Join</span>
+		                		<span onClick={this.showLoginPopup}>Join</span>
 		                	}
 		                	
 
