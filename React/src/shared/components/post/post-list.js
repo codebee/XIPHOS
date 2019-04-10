@@ -10,7 +10,7 @@ export default class PostList extends React.Component{
 
 	render(){
 		return(
-			 <div class="post-list">
+			 <div className="post-list">
 			 	<Post/>
 			 </div>
 		)

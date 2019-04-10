@@ -1,9 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import Header from "../components/common/header";
 import Loader from "../components/common/loader";
-import PostList from "../components/post/post-list";
+
+
+import RantListPage from "./rantListPage";
+import RantDetailsPage from "./rantDetailsPage";
 
 export default class App extends React.Component{
 	constructor(){
@@ -24,29 +28,32 @@ export default class App extends React.Component{
 	}
 
 	render(){
+
+		console.log("test", this.state.isLoading);
 		return(
-			<React.Fragment>
-
-				<Header user={this.state.user}/>
-			    
-			    
-					<section class="main layout--center">
-			            <div class="main__content layout--wrapped">
-
-
-			            	{this.state.isLoading && 
-			            		<Loader/>
-			            	}
-
-			            	{this.state.view == "Post" && !this.state.isLoading &&
-			            		<PostList/>
-			            	}
+			
+				<Router>
+					<React.Fragment>
+						<Header user={this.state.user}/>
+				    					    
+						<section className="main layout--center">
+				            <div className="main__content layout--wrapped">
 
 
-			            </div>
-			        </section>
-			    
-	       </React.Fragment>	        	    	
+				            	{this.state.isLoading && 
+				            		<Loader/>
+				            	}
+
+				            	<Route exact path="/" render={(props) => <RantListPage {...props} isLoading={this.state.isLoading}/>} />
+				            	<Route exact path="/rant/:rant_id" render={(props) => <RantDetailsPage {...props} isLoading={this.state.isLoading}/>} />
+
+
+				            	
+				            </div>
+				        </section>
+				      </React.Fragment>  
+			    </Router>
+	      	        	    	
 		)
 	}
 }

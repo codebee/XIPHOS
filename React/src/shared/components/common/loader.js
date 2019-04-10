@@ -7,8 +7,8 @@ export default class Loader extends React.Component{
 
 	render(){
 		return(
-			<div class="loader">
-              <div class="spinner"></div>
+			<div className="loader">
+              <div className="spinner"></div>
             </div>
 		)
 	}

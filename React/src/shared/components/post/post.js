@@ -8,20 +8,20 @@ export default class Post extends React.Component{
 
 	render(){
 		return(
-			<article class="post">
-                 <div class="post__inner">
-                    <div class="score">
-                        <div class="score__up layout--center">++</div>
-                        <div class="score__board layout--center">100</div>
-                        <div class="score__down layout--center">--</div>
+			<article className="post">
+                 <div className="post__inner">
+                    <div className="score">
+                        <div className="score__up layout--center">++</div>
+                        <div className="score__board layout--center">100</div>
+                        <div className="score__down layout--center">--</div>
                     </div>
-                    <div class="post__body">
+                    <div className="post__body">
                         Hello World... </div>
                 </div>
-                <div class="post__footer">
-                    <div class="post__time">2m ago</div>
-                    <div class="post__comments">
-                        <svg class="icon" viewBox="0 0 31 32">
+                <div className="post__footer">
+                    <div className="post__time">2m ago</div>
+                    <div className="post__comments">
+                        <svg className="icon" viewBox="0 0 31 32">
                             <path d="M24.732 24.371v7.629l-7.267-7.267h-8.808c-4.781 
                             0-8.657-3.875-8.657-8.657v-7.42c0-4.781 3.876-8.657 
                             8.657-8.657h13.604c4.781 0 8.657 3.875 8.657 8.657v7.42c0 
