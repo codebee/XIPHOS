@@ -1,4 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Abel|Fredoka+One');
+
 .App {
   font-family: sans-serif;
   text-align: center;
 }
+
+@import './app.scss';
