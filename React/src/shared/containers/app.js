@@ -18,14 +18,15 @@ export default class App extends React.Component{
 		this.state={
 			user:"Gayan",
 			view: "Post",
-			isLoading: true
+			isLoading: true,
+			isOpen:true
 		}
 	}
 
 	componentDidMount(){
 		const that = this;
 		setTimeout(function(){
-			{that.setState({isLoading:false})}
+			{that.setState({isLoading:false, isOpen:false})}
 		},1000);
 	}
 
@@ -50,7 +51,7 @@ export default class App extends React.Component{
 				            	<Route exact path="/rant/:rant_id" render={(props) => <RantDetailsPage {...props} isLoading={this.state.isLoading}/>} />
 
 
-				            	<LoginPopup/>
+				            	<LoginPopup isOpen={this.state.isOpen}/>
 				            	
 				            </div>
 				        </section>

@@ -6,42 +6,49 @@ export default class LoginPopup extends React.Component{
 		super()
 	}
 
-	render(){
+	render(){		
+		const popupToggle = (this.props.isOpen ? "popup--open" : "popup--close")		
+
 		return(
-			<div class="popup popup--open">
-		        <div class="popup__header">
-		            <div title="Close" class="close layout--center">
-		                X
-		            </div>
-		        </div>
-		        <div class="popup__body layout--center">
-		            <div class="popup__body-inner">
+			<React.Fragment>				
+					<div className={"popup "+popupToggle}>
+				        <div className="popup__header">
+				            <div title="Close" className="close layout--center">
+				                X
+				            </div>
+				        </div>
+				        <div className="popup__body layout--center">
+				            <div className="popup__body-inner">
 
-		                <div class="form">
-		                    <div class="form__title">
-		                        NEW <span class="highlight">#</span>RANT
-		                    </div>
-		                    <div class="form__description">
-		                        Express yourself with 140 characters.
-		                    </div>
-		                    <form name="new-rant">
-		                        <div class="new-rant">
-		                            <textarea maxlength="140"></textarea>
+				                <div className="form">
+				                    <div className="form__title">
+				                        JOIN <span className="highlight">#</span>DEVRANT
+				                    </div>
+				                    <div className="form__description">
+				                        Vote and comment on others' rants. Post your own.
+				                    </div>
+				                    <form name="login">
+				                        <div className="login">
 
-		                            <Loader/>
+				                            <input type="text" placeholder="USERNAME" />
+				                            <input type="password" placeholder="PASSWORD" />
 
-		                            <div class="form__error">
-		                                Some fields are missing !
-		                            </div>
+				                            <Loader/>
 
-		                            <input type="submit" value="POST"/>
-		                        </div>
-		                    </form>
-		                </div>
+				                            <div className="form__error">
+				                                Some fields are missing !
+				                            </div>
 
-		            </div>
-		        </div>
-		    </div>
+				                            <input type="submit" value="LET ME IN" />
+				                        </div>
+				                    </form>
+				                </div>
+				            </div>
+				        </div>
+				    </div> 
+			
+			</React.Fragment>
+			
 		)
 	}
 }
