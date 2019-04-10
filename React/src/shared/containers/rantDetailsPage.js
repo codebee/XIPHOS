@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import PostDetails from '../components/post/post-details'
 
 
 export default class RantDetailsPage extends React.Component{
@@ -16,9 +17,7 @@ export default class RantDetailsPage extends React.Component{
 			<React.Fragment>
 
 				{!isLoading && 
-					<div>
-						RantDetailsPage
-					</div>
+					<PostDetails/>
 				}
 
 			</React.Fragment>	        	    	
