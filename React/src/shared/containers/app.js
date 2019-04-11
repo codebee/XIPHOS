@@ -24,6 +24,7 @@ export default class App extends React.Component{
 		}
 
 		this.showLoginPopup = this.showLoginPopup.bind(this);
+		this.closePopup = this.closePopup.bind(this);
 	}
 
 	componentDidMount(){
@@ -33,14 +34,18 @@ export default class App extends React.Component{
 		},1000);
 	}
 
-	showLoginPopup(e){   
-	    console.log("click 123");
+	//show login popup
+	showLoginPopup(e){   	    
 	    this.setState({isOpen:true});
 	}
 
-	render(){
+	//close login popup
+	closePopup(e){		
+		this.setState({isOpen:false});
+	}	
 
-		console.log("test", this.state.isLoading);
+	render(){
+		
 		return(
 			
 				<Router>
@@ -59,7 +64,7 @@ export default class App extends React.Component{
 				            	<Route exact path="/rant/:rant_id" render={(props) => <RantDetailsPage {...props} isLoading={this.state.isLoading}/>} />
 
 
-				            	<LoginPopup isOpen={this.state.isOpen}/>
+				            	<LoginPopup isOpen={this.state.isOpen} dispatch={this.closePopup}/>
 				            	
 				            </div>
 				        </section>

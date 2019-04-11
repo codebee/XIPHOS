@@ -2,18 +2,29 @@ import React from "react";
 import Loader from "./loader";
 
 export default class LoginPopup extends React.Component{
-	constructor(){
-		super()
-	}
+	constructor(props){
+		super(props)
 
-	render(){		
-		const popupToggle = (this.props.isOpen ? "popup--open" : "popup--close")		
+		this.state={
+			isOpen:this.props.isOpen
+		}
+		
+		this.closePopup = this.props.dispatch;
+	}	
+
+	render(){	
+
+			
+		const isOpen = this.props.isOpen;
+
+		console.log("{}{}",this.state.isOpen, isOpen);
+		const popupToggle = (isOpen ? "popup--open" : "popup--close")		
 
 		return(
 			<React.Fragment>				
 					<div className={"popup "+popupToggle}>
 				        <div className="popup__header">
-				            <div title="Close" className="close layout--center">
+				            <div title="Close" className="close layout--center" onClick={this.closePopup}>
 				                X
 				            </div>
 				        </div>
