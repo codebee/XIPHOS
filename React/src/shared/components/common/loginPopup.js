@@ -55,7 +55,7 @@ export default class LoginPopup extends React.Component{
 				                            <input type="password" placeholder="PASSWORD" />				                           
 
 				                            {this.state.isLoginAttempt && 
-				                            	<Loader/>
+				                            	<Loader />
 				                            }
 				                            
 				                            {this.state.isLoginValidate &&
@@ -64,7 +64,6 @@ export default class LoginPopup extends React.Component{
 					                            </div>				                            	
 				                            }
 				                            
-
 				                            <input type="submit" value="LET ME IN" />
 				                        </div>
 				                    </form>
