@@ -6,19 +6,29 @@ export default class LoginPopup extends React.Component{
 		super(props)
 
 		this.state={
-			isOpen:this.props.isOpen
+			isOpen:this.props.isOpen,
+			isLoginAttempt : false,
+			isLoginValidate : false
 		}
 		
 		this.closePopup = this.props.dispatch;
+
+		// create a ref to store the textInput DOM element
+	    this.textInputUserName = React.createRef();
+	}	
+
+	componentDidMount(){		
+	   this.textInputUserName.current.focus();
 	}	
 
 	render(){	
 
 			
-		const isOpen = this.props.isOpen;
-
-		console.log("{}{}",this.state.isOpen, isOpen);
-		const popupToggle = (isOpen ? "popup--open" : "popup--close")		
+		const isOpen = this.props.isOpen;		
+		const popupToggle = (isOpen ? "popup--open" : "popup--close")
+		if(isOpen){
+			this.textInputUserName.current.focus();
+		}		
 
 		return(
 			<React.Fragment>				
@@ -41,14 +51,19 @@ export default class LoginPopup extends React.Component{
 				                    <form name="login">
 				                        <div className="login">
 
-				                            <input type="text" placeholder="USERNAME" />
-				                            <input type="password" placeholder="PASSWORD" />
+				                            <input type="text" placeholder="USERNAME"  ref={this.textInputUserName}/>
+				                            <input type="password" placeholder="PASSWORD" />				                           
 
-				                            <Loader/>
-
-				                            <div className="form__error">
-				                                Some fields are missing !
-				                            </div>
+				                            {this.state.isLoginAttempt && 
+				                            	<Loader/>
+				                            }
+				                            
+				                            {this.state.isLoginValidate &&
+				                            	<div className="form__error">
+					                                Some fields are missing !
+					                            </div>				                            	
+				                            }
+				                            
 
 				                            <input type="submit" value="LET ME IN" />
 				                        </div>
