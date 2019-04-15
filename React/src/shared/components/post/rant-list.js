@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Post from "./post";
+import Rant from "./rant";
 
-export default class PostList extends React.Component{
+export default class RantList extends React.Component{
 	constructor(props){
 		super(props)		
 	}
@@ -11,7 +11,7 @@ export default class PostList extends React.Component{
 	render(){
 		return(
 			 <div className="post-list">
-			 	<Post/>
+			 	<Rant/>
 
 			 	<div class="rant__add" title="Add Rant">+</div>
 			 </div>

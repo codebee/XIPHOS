@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-export default class Post extends React.Component{
+export default class Rant extends React.Component{
 	constructor(props){
 		super(props)		
 	}

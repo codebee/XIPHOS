@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import PostList from "../components/post/post-list";
+import RantList from "../components/post/rant-list";
 
 
 export default class RantListPage extends React.Component{
@@ -16,7 +16,7 @@ export default class RantListPage extends React.Component{
 		return(
 			<React.Fragment>
 				{!isLoading && 
-					<PostList/>					
+					<RantList/>					
 				}
 			</React.Fragment>	        	    	
 		)
