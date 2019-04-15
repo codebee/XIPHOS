@@ -90,9 +90,7 @@ export default class App extends React.Component{
 				            <div className="main__content layout--wrapped">
 
 
-				            	{this.state.isLoading && 
-				            		<Loader/>
-				            	}
+				            	
 
 				            	<Route exact path="/" render={(props) => <RantListPage {...props} isLoading={this.state.isLoading}/>} />
 				            	<Route exact path="/rant/:rant_id" render={(props) => <RantDetailsPage {...props} isLoading={this.state.isLoading}/>} />
