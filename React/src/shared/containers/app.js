@@ -18,6 +18,7 @@ export default class App extends React.Component{
 		let getLoggedInStorage = actionType.getLocalStorage("logged-in");
 		let user ="Gayan";
 		let showJoinButton = true;
+		let token = "";
 
 		if(getLoggedInStorage !== null){
 			let getLoggedInObj = JSON.parse(getLoggedInStorage);			
@@ -27,6 +28,7 @@ export default class App extends React.Component{
 
 				user = getLoggedInObj.username;
 				showJoinButton = false;
+				token = getLoggedInObj.token;
 			}			
 		}
 
@@ -35,7 +37,8 @@ export default class App extends React.Component{
 			view: "Post",
 			isLoading: true,
 			isOpen:false,
-			showJoinButton:showJoinButton
+			showJoinButton:showJoinButton,
+			token:token
 		}		
 
 		this.showLoginPopup = this.showLoginPopup.bind(this);
@@ -81,7 +84,7 @@ export default class App extends React.Component{
 			
 				<Router>
 					<React.Fragment>
-						<Header user={this.state.user} showJoinButton={this.state.showJoinButton} dispatch={this.showLoginPopup} dispatchUserSignOut={this.userSignOut}/>
+						<Header user={this.state.user} usertoken={this.state.token} showJoinButton={this.state.showJoinButton} dispatch={this.showLoginPopup} dispatchUserSignOut={this.userSignOut}/>
 				    					    
 						<section className="main layout--center">
 				            <div className="main__content layout--wrapped">

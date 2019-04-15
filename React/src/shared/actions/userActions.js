@@ -24,10 +24,12 @@ export function userActive(user) {
 
 
 //User Deactive
-export function userDeActive() {  
+export function userDeActive(token) { 
+
+    console.log("token from local stroge ",token); 
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-Token':'WCdSSzNPf5siyxoRPp1T9J' },
+        headers: { 'Content-Type': 'application/json', 'X-Token':token },
         body: ""
     };
          

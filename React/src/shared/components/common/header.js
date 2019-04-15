@@ -10,17 +10,18 @@ export default class Header extends React.Component{
 
 		this.state={
 			user:this.props.user,
-			showJoinButton:this.props.showJoinButton
+			showJoinButton:this.props.showJoinButton,
+			usertoken:this.props.usertoken
 		}
 		
 		this.showLoginPopup = this.props.dispatch;
 		this.userSignOut = this.userSignOut.bind(this);		
 	}
 	
-	userSignOut(e){
-		
+	userSignOut(e,token){		
 		const requestUserDeActive = async () => {
-			    const response = await userActions.userDeActive();
+							
+			    const response = await userActions.userDeActive(token);
 			    
 			    console.log(response);
 			    if(response.ok){
@@ -40,7 +41,7 @@ export default class Header extends React.Component{
 	render(){		
 		let user =this.props.user;
 		let	showJoinButton = this.props.showJoinButton;
-
+		let token = this.state.usertoken;
 		
 		return(
 			<React.Fragment>	
@@ -62,13 +63,13 @@ export default class Header extends React.Component{
 		                }
 
 		                <div className="join">
-		                	{showJoinButton &&
+		                	{showJoinButton &&		                	
 		                		<span onClick={this.showLoginPopup}>Join</span>
 		                	}
 		                	
 
-		                	{!showJoinButton &&
-		                		<span onClick={this.userSignOut}>Sign Out</span>
+		                	{!showJoinButton &&		                		
+		                		<span onClick={event => this.userSignOut(event, token)}>Sign Out</span>
 		                	}	                   
 		                    
 		                </div>
