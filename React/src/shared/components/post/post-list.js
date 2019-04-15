@@ -12,6 +12,8 @@ export default class PostList extends React.Component{
 		return(
 			 <div className="post-list">
 			 	<Post/>
+
+			 	<div class="rant__add" title="Add Rant">+</div>
 			 </div>
 		)
 	}

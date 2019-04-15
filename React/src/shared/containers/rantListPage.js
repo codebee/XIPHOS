@@ -16,7 +16,7 @@ export default class RantListPage extends React.Component{
 		return(
 			<React.Fragment>
 				{!isLoading && 
-					<PostList/>
+					<PostList/>					
 				}
 			</React.Fragment>	        	    	
 		)
