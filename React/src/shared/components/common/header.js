@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import * as userActions from '../../actions/userActions';
+import * as actionType from '../../actions/actionType';
 
 export default class Header extends React.Component{
 	constructor(props){
@@ -13,7 +14,7 @@ export default class Header extends React.Component{
 		}
 		
 		this.showLoginPopup = this.props.dispatch;
-		this.userSignOut = this.userSignOut.bind(this);	
+		this.userSignOut = this.userSignOut.bind(this);		
 	}
 	
 	userSignOut(e){
@@ -23,6 +24,8 @@ export default class Header extends React.Component{
 			    
 			    console.log(response);
 			    if(response.ok){
+
+			    	actionType.removeLocalStorage("logged-in");
 			    	//Disptach login success
 			    	this.props.dispatchUserSignOut(response)
 			    }else{
@@ -32,14 +35,13 @@ export default class Header extends React.Component{
 			}
 
 			requestUserDeActive();
-	}
-
+	}	
 	
-	render(){
-
+	render(){		
 		let user =this.props.user;
 		let	showJoinButton = this.props.showJoinButton;
 
+		
 		return(
 			<React.Fragment>	
 				<section className="header layout--center">

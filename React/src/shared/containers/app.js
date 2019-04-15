@@ -6,22 +6,37 @@ import Header from "../components/common/header";
 import Loader from "../components/common/loader";
 import LoginPopup from "../components/common/loginPopup";
 
+import * as actionType from '.././actions/actionType';
+
 import RantListPage from "./rantListPage";
 import RantDetailsPage from "./rantDetailsPage";
 
-
-
 export default class App extends React.Component{
-	constructor(){
-		super()
+	constructor(props){
+		super(props)
+
+		let getLoggedInStorage = actionType.getLocalStorage("logged-in");
+		let user ="Gayan";
+		let showJoinButton = true;
+
+		if(getLoggedInStorage !== null){
+			let getLoggedInObj = JSON.parse(getLoggedInStorage);			
+			if(typeof getLoggedInObj.token !== 'undefined'){
+
+				console.log(getLoggedInObj.token);
+
+				user = getLoggedInObj.username;
+				showJoinButton = false;
+			}			
+		}
 
 		this.state={
-			user:"Gayan",
+			user:user,
 			view: "Post",
 			isLoading: true,
 			isOpen:false,
-			showJoinButton:true
-		}
+			showJoinButton:showJoinButton
+		}		
 
 		this.showLoginPopup = this.showLoginPopup.bind(this);
 		this.userSignOut = this.userSignOut.bind(this);

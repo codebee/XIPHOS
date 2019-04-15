@@ -108,5 +108,10 @@ export const setLocalStorage = (key,value) =>{
 export const getLocalStorage = (key) =>{
 	const value = localStorage.getItem(key);
 	return value;
-}  
+} 
+
+//remove local storage
+export const removeLocalStorage = (key) => {
+	localStorage.removeItem(key);
+} 
 

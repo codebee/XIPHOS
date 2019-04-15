@@ -2,7 +2,7 @@ import React from "react";
 import Loader from "./loader";
 import validators from './validator';
 
-import * as errorMsg from '../../actions/actionType';
+import * as actionType from '../../actions/actionType';
 import * as userActions from '../../actions/userActions';
 
 export default class LoginPopup extends React.Component{
@@ -108,7 +108,7 @@ export default class LoginPopup extends React.Component{
 			    	//Disptach login success
 			    	this.props.dispatchUserLoginData(response)
 			    }else{
-			    	let errMsg = errorMsg.SERVER_ERROR_MESSAGE(response.error);
+			    	let errMsg = actionType.SERVER_ERROR_MESSAGE(response.error);
 			    	console.log(errMsg); 
 			    	this.setState({errorMsg:errMsg, isLoginValidate: false});
 			    }
