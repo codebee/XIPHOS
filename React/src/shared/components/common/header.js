@@ -22,12 +22,11 @@ export default class Header extends React.Component{
 		const requestUserDeActive = async () => {
 							
 			    const response = await userActions.userDeActive(token);
-			    
-			    console.log(response);
+			    			   
 			    if(response.ok){
-
+			    	//remove local storage
 			    	actionType.removeLocalStorage("logged-in");
-			    	//Disptach login success
+			    	//Disptach login success user deactive
 			    	this.props.dispatchUserSignOut(response)
 			    }else{
 			    	console.log("error");
