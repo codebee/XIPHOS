@@ -92,8 +92,8 @@ export default class App extends React.Component{
 
 				            	
 
-				            	<Route exact path="/" render={(props) => <RantListPage {...props} isLoading={this.state.isLoading}/>} />
-				            	<Route exact path="/rant/:rant_id" render={(props) => <RantDetailsPage {...props} isLoading={this.state.isLoading}/>} />
+				            	<Route exact path="/" render={(props) => <RantListPage {...props} isLoading={this.state.isLoading} usertoken={this.state.token}/>} />
+				            	<Route exact path="/rant/:rant_id" render={(props) => <RantDetailsPage {...props} isLoading={this.state.isLoading} usertoken={this.state.token}/>} />
 
 
 				            	<LoginPopup 
