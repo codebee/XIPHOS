@@ -1,20 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import * as actionType from '../../actions/actionType';
 
 export default class Rant extends React.Component{
 	constructor(props){
 		super(props)		
 	}
 
-	render(){ 
+	render(){
+        let getLoggedInStorage = actionType.getLocalStorage("logged-in");
+        let userToken ="";
+        if(getLoggedInStorage !== null){
+            let getLoggedInObj = JSON.parse(getLoggedInStorage);            
+            if(typeof getLoggedInObj.token !== 'undefined'){                
+                userToken = getLoggedInObj.token;
+            }           
+        }
         let rant = this.props.rant;        
 		return(
-			<article className="post" >
+			<article className="post" data-myvote={rant.myVote}>
                  <div className="post__inner">
                     <div className="score">
-                        <div className="score__up layout--center">++</div>
+                        <div className="score__up layout--center" onClick={event => this.props.voteUp(event,rant.myVote,userToken)}>++</div>
                         <div className="score__board layout--center">{rant.votes}</div>
-                        <div className="score__down layout--center">--</div>
+                        <div className="score__down layout--center" onClick={event => this.props.voteDown(event,rant.myVote,userToken)}>--</div>
                     </div>
                     <div className="post__body">
                         {rant.content}</div>

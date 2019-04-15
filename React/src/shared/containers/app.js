@@ -61,7 +61,7 @@ export default class App extends React.Component{
 
 	userSignOut(logoutres){
 		console.log("sing out",logoutres);
-		this.setState({isOpen:false,user:"",showJoinButton:true});
+		this.setState({isOpen:false,user:"",showJoinButton:true,token:""});
 	}
 
 	//close login popup
@@ -92,7 +92,7 @@ export default class App extends React.Component{
 
 				            	
 
-				            	<Route exact path="/" render={(props) => <RantListPage {...props} isLoading={this.state.isLoading} usertoken={this.state.token}/>} />
+				            	<Route exact path="/" render={(props) => <RantListPage {...props} isLoading={this.state.isLoading} usertoken={this.state.token} dispatchShowLoginPopup={this.showLoginPopup}/>} />
 				            	<Route exact path="/rant/:rant_id" render={(props) => <RantDetailsPage {...props} isLoading={this.state.isLoading} usertoken={this.state.token}/>} />
 
 
