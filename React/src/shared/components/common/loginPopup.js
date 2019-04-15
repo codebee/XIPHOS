@@ -2,6 +2,9 @@ import React from "react";
 import Loader from "./loader";
 import validators from './validator';
 
+import * as errorMsg from '../../actions/actionType';
+import * as userActions from '../../actions/userActions';
+
 export default class LoginPopup extends React.Component{
 	constructor(props){
 		super(props)		
@@ -9,7 +12,7 @@ export default class LoginPopup extends React.Component{
 		this.state=this.initialState;
 		
 		this.closePopup = this.props.dispatch;
-
+		
 		// create a ref to store the textInput DOM element
 	    this.textInputUserName = React.createRef();
 
@@ -28,8 +31,8 @@ export default class LoginPopup extends React.Component{
 			isUserVisited: false,
 			userInfo: {
 				        username: '',
-				        password: '',
-				      },
+				        password: ''
+				      },			
 			errorMsg:"Some fields are missing !"
 		};
     }
@@ -41,6 +44,16 @@ export default class LoginPopup extends React.Component{
 	handleInputChange(event, inputPropName){
 		const newState = Object.assign({}, this.state);
 	    newState.userInfo[inputPropName] = event.target.value;
+
+	    console.log(newState.userInfo[inputPropName], inputPropName,this.state.userInfo.password);
+
+	    if(inputPropName == "password"){
+	    	this.setState({password:event.target.value});
+	    }
+	    if(inputPropName == "username"){
+	    	this.setState({username:event.target.value});
+	    }
+
 	    this.setState(newState);
 	}
 
@@ -61,20 +74,48 @@ export default class LoginPopup extends React.Component{
 	handleSubmit(e){
 		console.log(this.state.userInfo);
 
-		if(this.state.userInfo.username == ""){
+		let username = this.state.userInfo.username;
+		let password = this.state.userInfo.password;
+
+		if(username == ""){
 			this.setState({errorMsg:"Username is required", isLoginValidate: false});
 		}
 
-		if(this.state.userInfo.password == ""){
+		if(password == ""){
 			this.setState({errorMsg:"Password is required", isLoginValidate: false});
 		}
 
-		if(this.state.userInfo.username == "" && this.state.userInfo.password == ""){
+		if(username == "" && password == ""){
 			this.setState({errorMsg:"Some fields are missing !", isLoginValidate: false});
 		}
 
-		if(this.state.userInfo.username !== "" && this.state.userInfo.password !== ""){
+		if(username !== "" && password !== ""){
 			this.setState({errorMsg:"", isLoginValidate: true});
+
+			let user={
+						"username": username,
+						"password": password
+					}
+
+			this.setState({isLoginAttempt:true});
+
+			const requestUserActive = async () => {
+			    const response = await userActions.userActive(user);
+
+			    this.setState({isLoginAttempt:false});
+
+			    if(response.ok){
+			    	//Disptach login success
+			    	this.props.dispatchUserLoginData(response)
+			    }else{
+			    	let errMsg = errorMsg.SERVER_ERROR_MESSAGE(response.error);
+			    	console.log(errMsg); 
+			    	this.setState({errorMsg:errMsg, isLoginValidate: false});
+			    }
+			    	    
+			}
+
+			requestUserActive();
 		}
 
 		e.preventDefault();
@@ -93,7 +134,7 @@ export default class LoginPopup extends React.Component{
 		if(isOpen){
 			popupToggle = "popup--open";
 
-			this.resetState();
+			//this.resetState();
 
 			if(!this.state.isUserVisited){
 				this.textInputUserName.current.focus();
@@ -101,7 +142,9 @@ export default class LoginPopup extends React.Component{
 			}
 		}
 
-				
+		console.log(this.state,this.state.userInfo.password);
+
+		let isLoginBoxVisibleClass = (this.state.isLoginAttempt)?'hide':'';		
 
 		return(
 			<React.Fragment>				
@@ -132,6 +175,7 @@ export default class LoginPopup extends React.Component{
 				                            	value={this.state.userInfo.username}
                   								onChange={event => this.handleInputChange(event, 'username')}
                   								onBlur={event => this.handleInputOnblur(event, 'username')}
+                  								className={isLoginBoxVisibleClass}
                   							/>
                   							
 				                            <input 
@@ -141,8 +185,8 @@ export default class LoginPopup extends React.Component{
 				                            	value={this.state.userInfo.password}
                   								onChange={event => this.handleInputChange(event, 'password')}
                   								onBlur={event => this.handleInputOnblur(event, 'password')}
-                  							/>				                           
-                  							
+                  								className={isLoginBoxVisibleClass}
+                  							/>				                                             							
 
 				                            {this.state.isLoginAttempt && 
 				                            	<Loader />
@@ -153,8 +197,13 @@ export default class LoginPopup extends React.Component{
 					                               {this.state.errorMsg}
 					                            </div>				                            	
 				                            }
-				                            
-				                            <input type="submit" value="LET ME IN" />
+
+				                            {this.state.isLoginAttempt ? (
+				                            	 <input type="submit" value="LET ME IN" disabled/>
+				                            ) : (
+				                            	 <input type="submit" value="LET ME IN"/>
+				                            )}				                            
+				                           
 				                        </div>
 				                    </form>
 				                </div>

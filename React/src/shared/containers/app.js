@@ -20,11 +20,13 @@ export default class App extends React.Component{
 			view: "Post",
 			isLoading: true,
 			isOpen:false,
-
+			showJoinButton:true
 		}
 
 		this.showLoginPopup = this.showLoginPopup.bind(this);
+		this.userSignOut = this.userSignOut.bind(this);
 		this.closePopup = this.closePopup.bind(this);
+		this.getUserLoginData = this.getUserLoginData.bind(this);
 	}
 
 	componentDidMount(){
@@ -39,18 +41,32 @@ export default class App extends React.Component{
 	    this.setState({isOpen:true});
 	}
 
+	userSignOut(logoutres){
+		console.log("sing out",logoutres);
+		this.setState({isOpen:false,user:"",showJoinButton:true});
+	}
+
 	//close login popup
 	closePopup(e){		
 		this.setState({isOpen:false});
 	}	
 
+	getUserLoginData(user){
+		console.log(user);
+		//if(user.ok){
+			this.setState({isOpen:false,user:user.username,showJoinButton:false});
+		//}
+	}
+
 	render(){
 		
+		console.log(this.state);
+
 		return(
 			
 				<Router>
 					<React.Fragment>
-						<Header user={this.state.user} dispatch={this.showLoginPopup}/>
+						<Header user={this.state.user} showJoinButton={this.state.showJoinButton} dispatch={this.showLoginPopup} dispatchUserSignOut={this.userSignOut}/>
 				    					    
 						<section className="main layout--center">
 				            <div className="main__content layout--wrapped">
@@ -64,7 +80,11 @@ export default class App extends React.Component{
 				            	<Route exact path="/rant/:rant_id" render={(props) => <RantDetailsPage {...props} isLoading={this.state.isLoading}/>} />
 
 
-				            	<LoginPopup isOpen={this.state.isOpen} dispatch={this.closePopup}/>
+				            	<LoginPopup 
+				            		isOpen={this.state.isOpen} 
+				            		dispatch={this.closePopup}
+				            		dispatchUserLoginData = {this.getUserLoginData}
+				            	/>
 				            	
 				            </div>
 				        </section>

@@ -47,3 +47,66 @@ export const COMMENTS_ADD_XTOKEN			= '1LFq2mHVc9WH6NkgXVwV4L';
 
 export const COMMENTS_DELETE_URL			= 'https://api.devrant.thusitha.site/v1/comment.delete';
 export const COMMENTS_DELETE_XTOKEN			= '1LFq2mHVc9WH6NkgXVwV4L';
+
+export const SERVER_ERROR_MESSAGE = (error) => {
+	let errMsg = "";
+	switch(error){
+		case "INVALID_CREDENTIALS":{
+			errMsg = "invalid credentials, try again!";
+			break;
+		}
+		case "INVALID_TOKEN":{
+			errMsg = "invalid token, try again!";
+			break;
+		}
+		case "SERVER_ERROR":{
+			errMsg = "server error, try again!";
+			break;
+		}
+		case "ACCESS_DENIED":{
+			errMsg = "access denied, try again!";
+			break;
+		}
+		case "MISSING_CONTENT":{
+			errMsg = "missing content, try again!";
+			break;
+		}
+		case "INVALID_POST_ID":{
+			errMsg = "invalid post id, try again!";
+			break;
+		}
+		case "MISSING_DIRECTION":{
+			errMsg = "missing direction, try again!";
+			break;
+		}
+		case "AUTHOR_CANNOT_VOTE":{
+			errMsg = "author cannot vote, try again!";
+			break;
+		}
+		case "MISSING_COMMENT":{
+			errMsg = "missing comment, try again!";
+			break;
+		}
+		case "MISSING_COMMENT_ID":{
+			errMsg = "missing comment id, try again!";
+			break;
+		}
+		case "500_SERVER_ERROR":{
+			errMsg = "500 server error, try again!";
+			break;
+		}
+	}
+	return errMsg;
+};
+
+//set local storage
+export const setLocalStorage = (key,value) =>{
+	localStorage.setItem(key, value);
+} 
+
+//get local storage
+export const getLocalStorage = (key) =>{
+	const value = localStorage.getItem(key);
+	return value;
+}  
+

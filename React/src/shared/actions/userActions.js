@@ -12,6 +12,9 @@ export function userActive(user) {
             .then(res => res.json())
             .then(resUserobj => {                                       
              	 console.log(resUserobj);
+
+               actionType.setLocalStorage('logged-in', JSON.stringify(resUserobj));
+
                return resUserobj;  
             })
             .catch(error => {

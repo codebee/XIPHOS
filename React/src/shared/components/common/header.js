@@ -1,21 +1,45 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import * as userActions from '../../actions/userActions';
+
 export default class Header extends React.Component{
 	constructor(props){
 		super(props)
 
 		this.state={
 			user:this.props.user,
-			showJoinButton:true
+			showJoinButton:this.props.showJoinButton
 		}
-
 		
-		this.showLoginPopup = this.props.dispatch;		
+		this.showLoginPopup = this.props.dispatch;
+		this.userSignOut = this.userSignOut.bind(this);	
 	}
 	
+	userSignOut(e){
+		
+		const requestUserDeActive = async () => {
+			    const response = await userActions.userDeActive();
+			    
+			    console.log(response);
+			    if(response.ok){
+			    	//Disptach login success
+			    	this.props.dispatchUserSignOut(response)
+			    }else{
+			    	console.log("error");
+			    }
+			    	    
+			}
 
+			requestUserDeActive();
+	}
+
+	
 	render(){
+
+		let user =this.props.user;
+		let	showJoinButton = this.props.showJoinButton;
+
 		return(
 			<React.Fragment>	
 				<section className="header layout--center">
@@ -24,25 +48,25 @@ export default class Header extends React.Component{
 		                    <a href="/"><div className="brand__name"><span>#</span>DEVRANT</div></a>
 		                </div>
 
-		                {!this.state.showJoinButton &&
+		                {!showJoinButton &&
 		                	<div className="profile layout--center">
 			                    <div className="profile__picture">
 			                        <svg height="36" width="36">
 			                            <circle cx="18" cy="18" r="18" fill="#5c5f6f"></circle>
 			                        </svg>
 			                    </div>
-			                    <div className="profile__name">{this.state.user}</div>
+			                    <div className="profile__name">{user}</div>
 			                </div>
 		                }
 
 		                <div className="join">
-		                	{this.state.showJoinButton &&
+		                	{showJoinButton &&
 		                		<span onClick={this.showLoginPopup}>Join</span>
 		                	}
 		                	
 
-		                	{!this.state.showJoinButton &&
-		                		<span>Sign Out</span>
+		                	{!showJoinButton &&
+		                		<span onClick={this.userSignOut}>Sign Out</span>
 		                	}	                   
 		                    
 		                </div>
