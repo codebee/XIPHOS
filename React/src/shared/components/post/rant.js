@@ -21,9 +21,9 @@ export default class Rant extends React.Component{
 			<article className="post" data-myvote={rant.myVote}>
                  <div className="post__inner">
                     <div className="score">
-                        <div className="score__up layout--center" onClick={event => this.props.voteUp(event,rant.myVote,userToken)}>++</div>
+                        <div className="score__up layout--center" onClick={event => this.props.voteUp(event,rant.myVote,rant.id,userToken)}>++</div>
                         <div className="score__board layout--center">{rant.votes}</div>
-                        <div className="score__down layout--center" onClick={event => this.props.voteDown(event,rant.myVote,userToken)}>--</div>
+                        <div className="score__down layout--center" onClick={event => this.props.voteDown(event,rant.myVote,rant.id,userToken)}>--</div>
                     </div>
                     <div className="post__body">
                         {rant.content}</div>

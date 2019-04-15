@@ -16,7 +16,7 @@ export default class RantListPage extends React.Component{
 			usertoken:this.props.usertoken
 		}
 		
-		let token = "1LFq2mHVc9WH6NkgXVwV4L";
+		let token = "8h3ZPVGARJQx24ES9sJqRj";
 		const requestUserDeActive = async () => {							
 		    const response = await postActions.getRantList(token);
 		    this.setState({rants:response});		    			  		 		    	   
@@ -30,9 +30,26 @@ export default class RantListPage extends React.Component{
 
 	//Vote up with user token
 	//If user not loged visible login popup
-	voteUp(e, myvote,userToken){		
+	voteUp(e, myvote, rantid, userToken){		
 		if(typeof userToken !== 'undefined' && userToken !== ""){
+			if(myvote == "1"){
+				console.log("vote up" , myvote, rantid, userToken);
 
+				let voteObj = {
+					"postId": rantid,
+					"direction": "up" 
+				}
+
+				const requestVoteUp = async () => {
+				    const response = await postActions.rantVote(userToken,voteObj);
+				    console.log(response);
+				        
+				}
+				requestVoteUp();
+
+			}else{
+				console.log("no vote up");
+			}
 		}else{
 			this.props.dispatchShowLoginPopup();
 		}
@@ -41,9 +58,26 @@ export default class RantListPage extends React.Component{
 
 	//Vote up with user token
 	//If user not loged visible login popup
-	voteDown(e, myvote,userToken){		
+	voteDown(e, myvote,rantid, userToken){		
 		if(typeof userToken !== 'undefined' && userToken !== ""){
+			if(myvote == "1"){
+				console.log("vote up");
 
+				let voteObj = {
+					"postId": rantid,
+					"direction": "down" 
+				}
+
+				const requestVoteUp = async () => {
+				    const response = await postActions.rantVote(userToken,voteObj);
+				    console.log(response);
+				        
+				}
+				requestVoteUp();
+
+			}else{
+				console.log("no vote down");
+			}
 		}else{
 			this.props.dispatchShowLoginPopup();
 		}
